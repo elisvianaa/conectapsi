@@ -18,17 +18,26 @@ abstract class _CaseControllerBase with Store {
   @observable
   String description = '';
 
+  @observable
+  bool error = false;
+
   @action
   Future createCase() async {
-    var response = await http.post(
-        'https://psicho-29d1e.firebaseio.com/${store.user.localId}/case.json',
-        body: json.encode({
-          "title": title,
-          "author": store.user.email,
-          "description": description,
-          "atribute": false
-        }));
-    createPublicCase();
+    if (title == '' || description == '') {
+      error = true;
+      return;
+    } else {
+      var response = await http.post(
+          'https://psicho-29d1e.firebaseio.com/${store.user.localId}/case.json',
+          body: json.encode({
+            "title": title,
+            "author": store.user.email,
+            "description": description,
+            "atribute": false
+          }));
+
+      createPublicCase();
+    }
   }
 
   @action
@@ -41,5 +50,7 @@ abstract class _CaseControllerBase with Store {
               "description": description,
               "atribute": false
             }));
+
+    Modular.to.pushReplacementNamed('/home');
   }
 }

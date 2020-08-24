@@ -6,10 +6,11 @@ class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
   @observable
-  bool openCard = false;
+
+  @observable
+  String type = '';
 
   @action
   void setOpenCard() {
-    openCard = !openCard;
   }
 }

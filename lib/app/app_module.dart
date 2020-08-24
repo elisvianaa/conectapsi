@@ -10,10 +10,12 @@ import 'package:elis/app/app_widget.dart';
 import 'package:elis/app/modules/home/home_module.dart';
 
 import 'modules/store/user_store.dart';
+import 'modules/store/case_store.dart';
 
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
+        Bind((i) => CaseStore()),
         Bind((i) => UserStore()),
         Bind((i) => AppController()),
       ];

@@ -9,18 +9,18 @@ part of 'home_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeController on _HomeControllerBase, Store {
-  final _$openCardAtom = Atom(name: '_HomeControllerBase.openCard');
+  final _$typeAtom = Atom(name: '_HomeControllerBase.type');
 
   @override
-  bool get openCard {
-    _$openCardAtom.reportRead();
-    return super.openCard;
+  String get type {
+    _$typeAtom.reportRead();
+    return super.type;
   }
 
   @override
-  set openCard(bool value) {
-    _$openCardAtom.reportWrite(value, super.openCard, () {
-      super.openCard = value;
+  set type(String value) {
+    _$typeAtom.reportWrite(value, super.type, () {
+      super.type = value;
     });
   }
 
@@ -41,7 +41,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
   @override
   String toString() {
     return '''
-openCard: ${openCard}
+type: ${type}
     ''';
   }
 }

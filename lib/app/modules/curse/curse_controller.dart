@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:elis/app/modules/store/user_store.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobx/mobx.dart';
 part 'curse_controller.g.dart';
@@ -22,22 +23,30 @@ abstract class _CurseControllerBase with Store {
 
   // @observable
   // DateTime dtcourse;
+  @observable
+  bool error = false;
 
   @action
   Future createCurse() async {
-    var response = await http.post(
-        'https://psicho-29d1e.firebaseio.com/${store.user.localId}/curse.json',
-        body: json.encode({
-          "title": title,
-          "author": store.user.email,
-          "description": description,
-          "local": local,
-          //"dtcourse": dtcourse,
-          //"dtcourse": DateTime.now(),
-          "dtcriation": DateTime.now(),
-          "atribute": false
-        }));
-    createPublicCurse();
+    if (title == '' || description == '' || local == '') {
+      error = true;
+
+      return;
+    } else {
+      var response = await http.post(
+          'https://psicho-29d1e.firebaseio.com/${store.user.localId}/curse.json',
+          body: json.encode({
+            "title": title,
+            "author": store.user.email,
+            "description": description,
+            "local": local,
+            //"dtcourse": dtcourse,
+            //"dtcourse": DateTime.now(),
+            //"dtcriation": DateTime.now(),
+            "atribute": false
+          }));
+      createPublicCurse();
+    }
   }
 
   @action
@@ -51,8 +60,10 @@ abstract class _CurseControllerBase with Store {
               "local": local,
               //"dtcourse": dtcourse,
               // "dtcourse": DateTime.now(),
-              "dtcriation": DateTime.now(),
+              // "dtcriation": DateTime.now(),
               "atribute": false
             }));
+
+    Modular.to.pushReplacementNamed('/home');
   }
 }

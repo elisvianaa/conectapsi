@@ -36,6 +36,13 @@ class _CursePageState extends ModularState<CursePage, CurseController> {
                   height: sh * 0.06,
                 ),
                 SizedBox(width: sw),
+                controller.error == true
+                    ? Text("Preencha os campos obrigatórios!",
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 15,
+                        ))
+                    : SizedBox(width: sw),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: sw * 0.03),
                   width: sw * 0.8,
@@ -48,12 +55,12 @@ class _CursePageState extends ModularState<CursePage, CurseController> {
                     },
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'Título',
+                      hintText: 'Título *',
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: sh * 0.06,
+                  height: sh * 0.04,
                 ),
                 SizedBox(width: sw),
                 Container(
@@ -68,7 +75,30 @@ class _CursePageState extends ModularState<CursePage, CurseController> {
                     },
                     decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'Local',
+                        hintText: 'Local *',
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.location_on),
+                          onPressed: () {},
+                        )),
+                  ),
+                ),
+                SizedBox(
+                  height: sh * 0.04,
+                ),
+                SizedBox(width: sw),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: sw * 0.03),
+                  width: sw * 0.8,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(sh * 0.02)),
+                  child: TextFormField(
+                    onChanged: (value) {
+                      controller.local = value;
+                    },
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Data *',
                         suffixIcon: IconButton(
                           icon: Icon(Icons.calendar_today),
                           onPressed: () {},
@@ -96,7 +126,7 @@ class _CursePageState extends ModularState<CursePage, CurseController> {
                     },
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'Descrição',
+                      hintText: 'Descrição *',
                     ),
                   ),
                 ),
@@ -107,9 +137,7 @@ class _CursePageState extends ModularState<CursePage, CurseController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //Comente
-          // controller.createCurse();
-          Modular.to.pushNamed('/home');
+          controller.createCurse();
         },
         child: Icon(
           Icons.add,

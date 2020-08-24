@@ -39,6 +39,21 @@ mixin _$CaseController on _CaseControllerBase, Store {
     });
   }
 
+  final _$errorAtom = Atom(name: '_CaseControllerBase.error');
+
+  @override
+  bool get error {
+    _$errorAtom.reportRead();
+    return super.error;
+  }
+
+  @override
+  set error(bool value) {
+    _$errorAtom.reportWrite(value, super.error, () {
+      super.error = value;
+    });
+  }
+
   final _$createCaseAsyncAction = AsyncAction('_CaseControllerBase.createCase');
 
   @override
@@ -58,7 +73,8 @@ mixin _$CaseController on _CaseControllerBase, Store {
   String toString() {
     return '''
 title: ${title},
-description: ${description}
+description: ${description},
+error: ${error}
     ''';
   }
 }

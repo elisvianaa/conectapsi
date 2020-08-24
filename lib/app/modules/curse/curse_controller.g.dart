@@ -54,6 +54,21 @@ mixin _$CurseController on _CurseControllerBase, Store {
     });
   }
 
+  final _$errorAtom = Atom(name: '_CurseControllerBase.error');
+
+  @override
+  bool get error {
+    _$errorAtom.reportRead();
+    return super.error;
+  }
+
+  @override
+  set error(bool value) {
+    _$errorAtom.reportWrite(value, super.error, () {
+      super.error = value;
+    });
+  }
+
   final _$createCurseAsyncAction =
       AsyncAction('_CurseControllerBase.createCurse');
 
@@ -75,7 +90,8 @@ mixin _$CurseController on _CurseControllerBase, Store {
     return '''
 title: ${title},
 description: ${description},
-local: ${local}
+local: ${local},
+error: ${error}
     ''';
   }
 }
