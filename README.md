@@ -1,6 +1,6 @@
-# elis
+# ConectaPSI
 
-A new Flutter project. Created by Slidy
+Aplicativo mobile ConectaPsi,  voltado para os psicólogos que atuam na Clínica Saúde Mental trocarem experiências de seus casos clínicos, compartilharem seus currículos e ofertarem cursos de formação. 
 
 ## Getting Started
 
